@@ -1,0 +1,18 @@
+{
+  "name": "NigshahOM",
+  "version": "0.0.0",
+  "authors": [
+    "Mohammad Umair Khan <mohammad.umair.k@gmail.com>"
+  ],
+  "description": "Nighshah Office Management",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular-resource": "~1.2.16",
+    "bootstrap": "~3.1.1",
+    "toastr": "~2.0.3",
+    "angular": "~1.2.16",
+    "jquery": "~2.1.1",
+    "angular-ui-router": "~0.2.10"
+  }
+}

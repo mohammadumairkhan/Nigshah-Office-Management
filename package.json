@@ -1,0 +1,22 @@
+{
+  "name": "NigshahOM",
+  "version": "0.0.0",
+  "description": "Nigshah Office Management Software",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mohammad Umair Khan",
+  "license": "ISC",
+  "devDependencies": {
+    "passport-local": "~1.0.0",
+    "passport": "~0.2.0",
+    "cookie-parser": "~1.1.0",
+    "express-session": "~1.1.0",
+    "body-parser": "~1.2.0",
+    "express": "~4.2.0",
+    "bower": "~1.3.3",
+    "mongoose": "~3.8.9",
+    "morgan": "~1.0.1"
+  }
+}
