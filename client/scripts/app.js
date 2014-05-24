@@ -1,23 +1,21 @@
-var app = angular.module('NigshahOM', ['ui.router']);
+var app = angular.module('NigshahOM', ['ui.router', 'ngResource']);
 
 app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-	$urlRouterProvider.otherwise('/about');
+	$urlRouterProvider.otherwise('/dashboard');
 
 	$stateProvider
 		.state('About',{
 			url:'/about',
 			templateUrl:'views/about.html'
 		})
+		.state('Dashboard',{
+			url:'/dashboard',
+			templateUrl: 'views/dashboard/dashboard.html',
+			controller:'dashboardCtrl'
+		})
 		.state('Accounts',{
 			url:'/accounts',
 			templateUrl:'views/accounts/accounts.html',
-			controller: 'accountsCtrl',
-			resolve:{
-				AccountDetail: function($http){
-					return $http.get('/api/accounts').then(function(res){
-						return res.data;
-					})
-				}
-			}
+			controller: 'accountsCtrl'
 		})
 }]);

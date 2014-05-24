@@ -1,3 +1,14 @@
-angular.module('NigshahOM').controller('accountsCtrl', ['$scope','AccountDetail', function ($scope, AccountDetail) {
-	$scope.AccountDetail = AccountDetail;
+'use strict'
+
+angular.module('NigshahOM').controller('accountsCtrl', ['$scope', 'accountsServ', function ($scope, accountsServ) {
+    
+    $scope.allAccountsData = accountsServ.GetAllAccounts();
+
+    $scope.getTransactionsForAccount = function(accountNumber){
+    	$scope.allTransactions = accountsServ.GetAllTransactionsForAccount(accountNumber);
+    }
+    
+	$scope.showAddTransactionModal = function(){
+		
+	}
 }]);
