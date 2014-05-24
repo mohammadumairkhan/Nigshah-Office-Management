@@ -2,11 +2,7 @@
 
 angular.module('NigshahOM').controller('accountsCtrl', ['$scope', 'accountsServ', function ($scope, accountsServ) {
     
-    $scope.allAccountsData = accountsServ.GetAllAccounts();
-
-    $scope.getTransactionsForAccount = function(accountNumber){
-    	$scope.allTransactions = accountsServ.GetAllTransactionsForAccount(accountNumber);
-    }
+    $scope.allAccounts = accountsServ.GetAllAccounts();
     
 	$scope.showAddTransactionModal = function(){
 		

@@ -18,4 +18,9 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
 			templateUrl:'views/accounts/accounts.html',
 			controller: 'accountsCtrl'
 		})
+		.state('Transactions',{
+			url:'/transactions/:accountNumber',
+			templateUrl:'views/accounts/transactions.html',
+			controller: 'transactionsCtrl'
+		})
 }]);

@@ -17,6 +17,7 @@ exports.initAccountsModel = function(){
 		accountNumber: 	{type: String, unique: true, required: '{PATH} is required'},
 		accountTitle: 	{type: String, required: '{PATH} is required'},
 		bankTitle: 		{type: String, required: '{PATH} is required'},
+		balanceAmount: 	{type: Number, required: '{PATH} is required'},
 		transactions: 	[]
 	});
 
