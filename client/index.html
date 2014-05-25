@@ -18,13 +18,12 @@
         padding-bottom: 40px;
       }
     </style>    
-    
+    <!-- build:css styles/bootstrap.css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <!-- endbuild -->
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/css/main.css">
     <link rel="stylesheet" href="bower_components/toastr/toastr.css">
-    <!-- endbuild -->
-    <!-- build:css styles/bootstrap.css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <!-- endbuild -->
   </head>
   <body>
@@ -40,13 +39,14 @@
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/toastr/toastr.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <!-- endbuild -->
 
     <!-- build:js scripts/scripts.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/dashboard/dashboardCtrl.js"></script>
-    <script src="scripts/accounts/accountsCtrl.js"></script>
-    <script src="scripts/accounts/accountsServ.js"></script>
+    <script src="scripts/accounts/summaryCtrl.js"></script>
+    <script src="scripts/accounts/summaryServ.js"></script>
     <script src="scripts/accounts/transactionsCtrl.js"></script>
     <script src="scripts/accounts/transactionsServ.js"></script>
     <!-- endbuild -->

@@ -8,6 +8,9 @@ angular.module('NigshahOM').factory('transactionsServ', ['$resource', function (
 	return {
 		GetAllTransactionsForAccount: function(accountId){
 			return TransactionsResource.getAll({id: accountId});
+		},
+		PostTransactionForAccount: function (accountId, addedtransaction) {
+		    return TransactionsResource.save({ id: accountId }, { transaction: addedtransaction }).$promise;
 		}
 	};
 }])

@@ -1,1 +1,1 @@
-mongod -f db\mongod.conf --repair
+mongod -f ..\db\mongod.conf --repair

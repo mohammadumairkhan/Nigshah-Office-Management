@@ -1,6 +1,6 @@
 'user strict'
 
-angular.module('NigshahOM').factory('accountsServ', ['$resource', function ($resource) {
+angular.module('NigshahOM').factory('summaryServ', ['$resource', function ($resource) {
 
     var methods = { getAll: {method: 'GET'}, put: {method: 'PUT'}};
     var AccountsResource = $resource('/api/accounts/:id', { id: '@id' }, methods);
