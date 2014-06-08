@@ -1,47 +1,58 @@
 'use strict'
 
-angular.module('NigshahOM').factory('transactionsServ', ['$resource', function ($resource) {
-	
-	var methods = { getAll: {method: 'GET'}, put: {method: 'PUT'}};
-	var TransactionsResource = $resource('/api/accounts/:id/transactions', { id: '@id' }, methods);
-	var transactionTypes = [
-        {
-            name:   'Credit',
-            value:  'credit'
-        },
-        {
-            name: 'Debit',
-            value: 'debit'
-        }
-	]
+angular.module('NigshahOM').factory('transactionsServ', ['Restangular', function (Restangular) {
 
-	var transactionModes = [
-        {
-            name:  'Cash',
-            value: 'cash'
-        },
-        {
-            name: 'Cheque',
-            value: 'cheque'
-        },
-        {
-            name: 'Online',
-            value: 'online'
-        }
-	]
+    return {
+	    GetAllTransactionsForAccount: GetAllTransactionsForAccount,
+	    PostTransactionForAccount : PostTransactionForAccount,
+	    GetTransactionTypes : GetTransactionTypes,
+        GetTransactionModes: GetTransactionModes,
+        SetAccountId : SetAccountId
+    };
 
-	return {
-		GetAllTransactionsForAccount: function(accountId){
-			return TransactionsResource.getAll({id: accountId});
-		},
-		PostTransactionForAccount: function (accountId, addedtransaction) {
-		    return TransactionsResource.save({ id: accountId }, { transaction: addedtransaction }).$promise;
-		},
-		GetTransactionTypes: function () {
-		    return transactionTypes;
-		},
-		GetTransactionModes: function () {
-		    return transactionModes;
-		}
-	};
+    var Transaction;
+
+    function GetAllTransactionsForAccount() {
+	    return Transaction.customGET();
+	}
+
+    function PostTransactionForAccount(addedtransaction) {
+        var newTransactionObj = { transaction: addedtransaction };
+        return Transaction.post(newTransactionObj);
+	    //return TransactionsResource.save({ id: accountId }, ).$promise;
+	}
+
+	function GetTransactionTypes() {
+	    return [
+            {
+                name: 'Credit',
+                value: 'credit'
+            },
+            {
+                name: 'Debit',
+                value: 'debit'
+            }
+	    ];
+	}
+
+	function GetTransactionModes() {
+	    return [
+            {
+                name: 'Cash',
+                value: 'cash'
+            },
+            {
+                name: 'Cheque',
+                value: 'cheque'
+            },
+            {
+                name: 'Online',
+                value: 'online'
+            }
+	    ];
+	}
+
+	function SetAccountId (accountId){
+	    Transaction = Restangular.one('accounts', accountId).all('transactions');
+	}
 }])

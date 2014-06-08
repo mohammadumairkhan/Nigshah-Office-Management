@@ -1,10 +1,5 @@
 'use strict'
 
-angular.module('NigshahOM').controller('summaryCtrl', ['$scope', 'summaryServ', function ($scope, summaryServ) {
-    
-    $scope.allAccounts = summaryServ.GetAllAccounts();
-    
-	$scope.showAddTransactionModal = function(){
-		
-	}
+angular.module('NigshahOM').controller('summaryCtrl', ['$scope', 'summaryServ','Accounts', function ($scope, summaryServ, Accounts) {
+    $scope.allAccounts = Accounts;
 }]);
