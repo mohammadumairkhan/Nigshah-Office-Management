@@ -7,9 +7,19 @@ angular.module('NigshahOM').controller('transactionsCtrl', ['$scope', 'Transacti
 	$scope.transactionModes = transactionsServ.GetTransactionModes();
 	$scope.addNewTransaction = function (transaction) {
 	    transactionsServ.PostTransactionForAccount(transaction).then(function (newTransaction) {
-	        $scope.allTransactions.Transactions.push(newTransaction);
+	        $scope.allTransactions.push(newTransaction);
 	    }, function (res) {
 
 	    });
+	}
+
+	$scope.deleteTransaction = function (tid) {
+	    transactionsServ.DeleteTransactionFromAccount(tid).then(function (res) {
+	        _.remove($scope.allTransactions, function (transaction) {
+	            return transaction.tid == res.tid;
+	        })
+	    }, function (res) {
+
+	    })
 	}
 }]);

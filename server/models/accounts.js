@@ -18,7 +18,7 @@ exports.initAccountsModel = function(){
 		accountTitle: 	{type: String, required: '{PATH} is required'},
 		bankTitle: 		{type: String, required: '{PATH} is required'},
 		balanceAmount: 	{type: Number, required: '{PATH} is required'},
-		transactions: 	[]
+		transactions: 	[transactionsSchema]
 	});
 
 	mongoose.model('Accounts', accountsSchema);

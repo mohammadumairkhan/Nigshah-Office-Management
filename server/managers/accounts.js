@@ -13,8 +13,8 @@ exports.GetAllTrasactionsForAccount = function(accountNumber){
 	return accounts.findOne({accountNumber: accountNumber}, {_id: 0, transactions: 1});
 }
 
-exports.GetTrasactionByTrasactionId = function(accountNumber, tId){
-	return accounts.find({accountNumber: accountNumber, transactions:{tid: tId}});
+exports.GetTransactionByTransactionId = function (accountNumber, tId) {
+    return accounts.findOne({ accountNumber: accountNumber }, { transactions: { $elemMatch: { tid: tId } } });
 }
 
 exports.PostTransactionForAccount = function (accountInfo, transaction) {
@@ -25,6 +25,11 @@ exports.PostTransactionForAccount = function (accountInfo, transaction) {
 
 exports.CreateNewTransactionId = function () {
     return mongoose.Types.ObjectId();
+}
+
+exports.DeleteTransactionById = function (accountNumber, tid, reverseTransactionParams) {
+    var newBalanceAmount = GetNewBalanceAmount(reverseTransactionParams.type, reverseTransactionParams.amount, reverseTransactionParams.balanceAmount);
+    return accounts.update({ accountNumber: accountNumber }, {$set:{balanceAmount: newBalanceAmount}, $pull: { transactions: { tid: tid } } });
 }
 
 function GetNewBalanceAmount(transactionType, transactionAmount, balanceAmount) {

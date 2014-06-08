@@ -4,7 +4,8 @@ angular.module('NigshahOM').factory('transactionsServ', ['Restangular', function
 
     return {
 	    GetAllTransactionsForAccount: GetAllTransactionsForAccount,
-	    PostTransactionForAccount : PostTransactionForAccount,
+	    PostTransactionForAccount: PostTransactionForAccount,
+	    DeleteTransactionFromAccount: DeleteTransactionFromAccount,
 	    GetTransactionTypes : GetTransactionTypes,
         GetTransactionModes: GetTransactionModes,
         SetAccountId : SetAccountId
@@ -54,5 +55,9 @@ angular.module('NigshahOM').factory('transactionsServ', ['Restangular', function
 
 	function SetAccountId (accountId){
 	    Transaction = Restangular.one('accounts', accountId).all('transactions');
+	}
+
+	function DeleteTransactionFromAccount(tid) {
+	    return Transaction.one(tid).remove();
 	}
 }])

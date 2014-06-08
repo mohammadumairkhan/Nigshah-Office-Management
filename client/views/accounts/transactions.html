@@ -16,6 +16,7 @@
 			<th>Reference</th>
 			<th>Type</th>
 			<th>Amount</th>
+            <th>Delete</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -27,6 +28,9 @@
 			<td ng-bind="transaction.reference"></td>
 			<td ng-bind="transaction.type"></td>
 			<td ng-bind="transaction.amount"></td>
+            <td ng-click="deleteTransaction(transaction.tid)">
+                <img src="/images/delete.png">
+            </td>
 		</tr>
 	</tbody>
 </table>

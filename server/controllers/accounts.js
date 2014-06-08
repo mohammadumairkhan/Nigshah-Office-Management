@@ -13,6 +13,8 @@ module.exports = function (app) {
 	router.get('/:id/transactions/:tid', GetTransactionByTransactionId);
 
 	router.post('/:id/transactions', GetAccountInfo, PostTransactionForAccount);
+
+	router.delete('/:id/transactions/:tid', GetAccountInfo, DeleteTransactionById);
     
 	function GetAllAccounts (req, res) {
 	    accountsManager.GetAllAccounts().exec(function(err, accounts){
@@ -39,7 +41,7 @@ module.exports = function (app) {
 	}
 
 	function GetTransactionByTransactionId(req, res){
-	    accountsManager.GetTrasactionByTrasactionId(req.params.id, req.params.tid).exec(function(err, transaction){
+	    accountsManager.GetTransactionByTransactionId(req.params.id, req.params.tid).exec(function (err, transaction) {
 	        return res.send(transaction);
 	    });
 	}
@@ -48,7 +50,7 @@ module.exports = function (app) {
 	    var accountInfo = req.accountInfo;
 	    var transaction = req.body.transaction;
 	    transaction.tid = accountsManager.CreateNewTransactionId();
-	    accountsManager.PostTransactionForAccount(accountInfo, transaction).exec(function (err, updatedTransaction, c, d, e) {
+	    accountsManager.PostTransactionForAccount(accountInfo, transaction).exec(function (err, updatedTransaction) {
 	        if(err)
 	            console.log(err);
 	        else {
@@ -56,6 +58,34 @@ module.exports = function (app) {
 	            return res.send(transaction);
 	        }
 	    });
+	}
+
+	function DeleteTransactionById(req, res) {
+	    var accountNumber = req.params.id;
+	    var tid = req.params.tid;
+	    accountsManager.GetTransactionByTransactionId(accountNumber, tid).exec(function (err, accountTransaction) {
+	        if (err) {
+	            res.status(404);
+	            res.send(err);
+	        }
+	        else {
+	            var transaction = accountTransaction.transactions[0];
+	            var reverseTransactionParams = {
+	                type: transaction.type == 'credit'? 'debit' : 'credit',
+	                amount: transaction.amount,
+	                balanceAmount: req.accountInfo.balanceAmount
+	            }
+	            console.log(reverseTransactionParams);
+	            accountsManager.DeleteTransactionById(accountNumber, tid, reverseTransactionParams).exec(function (err, deletedTransaction) {
+	                if (err) {
+	                    res.status(400)
+	                    res.send("Cannot delete");
+	                } else {
+	                    res.send({ accountNumber: accountNumber, tid: tid });
+	                }
+	            })
+	        }
+	    })
 	}
 
 	function GetAccountInfo(req, res, next) {
@@ -71,6 +101,7 @@ module.exports = function (app) {
 
 	    })
 	}
+
 
 	app.use('/api/accounts', router);
 };
